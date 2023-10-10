@@ -8,6 +8,7 @@
 
 #include "Shader.h"
 #include "Mesh.h"
+#include "math/tree.h"
 
 int SCR_WIDTH = 800;
 int SCR_HEIGHT = 600;
@@ -21,6 +22,12 @@ glm::vec3 cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
 glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
 
 int main() {
+
+	auto root = node<int>(5);
+	auto cooper = node<int>(7);
+	root.add_child(&cooper);
+	root.traverse([](auto kid) { std::cout << kid->data << std::endl; });
+
 	std::cout << "Initialising GLFW, GLAD and Window!" << std::endl;
 
 	glfwInit();
