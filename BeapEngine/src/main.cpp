@@ -7,7 +7,7 @@
 #include <GLFW/glfw3.h>
 
 
-void on_framebuf_resize(GLFWwindow* const, int width, int height) {
+void on_framebuf_resize(GLFWwindow*, int width, int height) {
 	glViewport(0, 0, width, height);
 }
 
