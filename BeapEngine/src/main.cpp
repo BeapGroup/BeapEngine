@@ -6,13 +6,22 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
+#include "Shader.h"
+#include "Mesh.h"
+
+int SCR_WIDTH = 800;
+int SCR_HEIGHT = 600;
 
 void on_framebuf_resize(GLFWwindow* const, int width, int height) {
 	glViewport(0, 0, width, height);
 }
 
+glm::vec3 cameraPos = glm::vec3(0.0f, 0.0f, 3.0f);
+glm::vec3 cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
+glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
+
 int main() {
-	std::cout << "Hello world!" << std::endl;
+	std::cout << "Initialising GLFW, GLAD and Window!" << std::endl;
 
 	glfwInit();
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
@@ -23,7 +32,7 @@ int main() {
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 #endif
 
-	GLFWwindow* window = glfwCreateWindow(800, 600, "Beap Engine", NULL, NULL);
+	GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "Beap Engine", NULL, NULL);
 	if (window == NULL) {
 		std::cout << "GL window creation failed" << std::endl;
 		glfwTerminate();
@@ -36,12 +45,43 @@ int main() {
 		return -1;
 	}
 
-	glViewport(0, 0, 800, 600);
+	glEnable(GL_DEPTH_TEST);
+
+	glViewport(0, 0, SCR_WIDTH, SCR_HEIGHT);
 	glfwSetFramebufferSizeCallback(window, on_framebuf_resize);
 
+	
+	// TODO : Shader pre-processing system and manager
+	Shader defaultShader("resources/shaders/default.vert","resources/shaders/default.frag");
+	Mesh cube;
+	
+	cube.shader = &defaultShader;
+	cube.SetupMesh();
+	cube.SetupTexture("resources/textures/mayro.png");
+
+	double lastTime = glfwGetTime();
 	while (!glfwWindowShouldClose(window)) {
+		double now = glfwGetTime();
+		float dt = now - lastTime;
+		glClearColor(0.2f, 0.7f, 0.6f, 1.0f);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+		defaultShader.use();
+		glm::mat4 projection = glm::perspective(glm::radians(45.0f), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
+		defaultShader.setMat4("projection", projection);
+
+		glm::mat4 view = glm::lookAt(cameraPos, cameraPos + cameraFront, cameraUp);
+		defaultShader.setMat4("view", view);
+
+		cube.eulerRotation.x += dt * 50.0f;
+		cube.eulerRotation.y += dt * 50.0f;
+
+		cube.Draw();
+
 		glfwSwapBuffers(window);
 		glfwPollEvents();
+
+		lastTime = now;
 	}
 
 	glfwTerminate();
