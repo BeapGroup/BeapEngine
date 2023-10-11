@@ -140,6 +140,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\hierarchy\hierarchy.h" />
+    <ClInclude Include="src\hierarchy\IRenderable.h" />
     <ClInclude Include="src\math\tree.h" />
     <ClInclude Include="src\Mesh.h" />
     <ClInclude Include="src\Shader.h" />

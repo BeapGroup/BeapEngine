@@ -9,6 +9,7 @@
 #include "Shader.h"
 #include "Mesh.h"
 #include "math/tree.h"
+#include "hierarchy/hierarchy.h"
 
 int SCR_WIDTH = 800;
 int SCR_HEIGHT = 600;
