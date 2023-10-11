@@ -8,11 +8,8 @@
 
 #include "Shader.h"
 #include "Mesh.h"
-<<<<<<< Updated upstream
 #include "math/tree.h"
-=======
 #include "Model.h"
->>>>>>> Stashed changes
 
 int SCR_WIDTH = 800;
 int SCR_HEIGHT = 600;
