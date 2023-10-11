@@ -5,6 +5,7 @@
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Mesh.cpp" />
     <ClCompile Include="src\thirdparty\stb_image.cpp" />
+    <ClCompile Include="src\hierarchy\hierarchy.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\hierarchy\hierarchy.h" />
