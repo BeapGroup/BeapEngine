@@ -10,6 +10,7 @@
 #include "Mesh.h"
 #include "math/tree.h"
 #include "Model.h"
+#include "hierarchy/instance.h"
 
 int SCR_WIDTH = 800;
 int SCR_HEIGHT = 600;
@@ -25,11 +26,6 @@ glm::vec3 cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
 glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
 
 int main() {
-
-	auto root = node<int>(5);
-	auto cooper = node<int>(7);
-	root.add_child(&cooper);
-	root.traverse([](auto kid) { std::cout << kid->data << std::endl; });
 
 	std::cout << "Initialising GLFW, GLAD and Window!" << std::endl;
 
@@ -62,8 +58,8 @@ int main() {
 
 	
 	// TODO : Shader pre-processing system and manager
-	Shader defaultShader("resources/shaders/default.vert","resources/shaders/default.frag");
-	Model cube("resources/models/monkey.gltf");
+	beap::Shader defaultShader("resources/shaders/default.vert","resources/shaders/default.frag");
+	beap::Model cube("resources/models/monkey.gltf");
 	for (int i = 0; i < cube.meshes.size(); i++)
 	{
 		cube.meshes.at(i).shader = &defaultShader;

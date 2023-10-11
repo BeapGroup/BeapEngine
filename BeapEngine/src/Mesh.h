@@ -1,5 +1,4 @@
-#ifndef MESH_H
-#define MESH_H
+#pragma once
 #define _CRT_SECURE_NO_WARNINGS
 
 #include <glad/glad.h>
@@ -18,30 +17,31 @@
 #include "renderer/VAO.h"
 #include "renderer/EBO.h"
 
-class Mesh
-{
-    
-public:
-    VAO VAO;
-    std::vector<Vertex> vertices;
-    std::vector<GLuint> indices;
+namespace beap {
 
-    //Replace with material struct later
-    unsigned int texture;
+    class Mesh
+    {
 
-    Shader* shader;
+    public:
+        VAO VAO;
+        std::vector<Vertex> vertices;
+        std::vector<GLuint> indices;
 
-    glm::vec3 translation = glm::vec3(0.0f);
-    glm::vec3 eulerRotation = glm::vec3(0.0f);
-    glm::vec3 scale = glm::vec3(1.0f);
+        //Replace with material struct later
+        unsigned int texture;
 
-    Mesh* parent;
-    Mesh(std::vector <Vertex>& vertices, std::vector <GLuint>& indices);
+        Shader* shader;
 
-    void Draw();
-    void SetupMesh();
-    void SetupTexture(const char* texturePath);
-};
+        glm::vec3 translation = glm::vec3(0.0f);
+        glm::vec3 eulerRotation = glm::vec3(0.0f);
+        glm::vec3 scale = glm::vec3(1.0f);
 
+        Mesh* parent;
+        Mesh(std::vector <Vertex>& vertices, std::vector <GLuint>& indices);
 
-#endif
+        void Draw();
+        void SetupMesh();
+        void SetupTexture(const char* texturePath);
+    };
+
+}

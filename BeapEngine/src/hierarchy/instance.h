@@ -4,38 +4,41 @@
 #include <algorithm>
 #include "../math/tree.h"
 
-class component {
-public:
-	virtual std::string component_name() = 0;
-};
-class flag_component : public component {
-public:
-	std::string component_name() override { return "flag"; }
-};
+namespace beap {
 
-class instance {
-public:
-	std::string name;
-	node<instance*>* manu;
-	unsigned int explorer_icon;
+	class component {
+	public:
+		virtual std::string component_name() const = 0;
+		virtual ~component() = 0;
+	};
+	class flag_component : public component {
+	public:
+		std::string component_name() const override { return "flag"; }
+	};
 
-	std::vector<component> components;
+	class instance {
+	public:
+		std::string name;
+		node<instance*>* manu;
 
-	//virtual instance clone() = 0;
-	//virtual std::string serialize() = 0;
+		std::vector<component> components;
 
-	void add_to_tree(node<instance*>* parent);
-	std::vector<node<instance*>*> getchildren() const;
+		//virtual instance clone() = 0;
+		//virtual std::string serialize() = 0;
 
-	bool has_component(std::string const& cname) {
-		return std::any_of(components.begin(), components.end(), 
-			[&cname](component& c) {
-				return c.component_name() == cname;
-			});
-	}
+		void add_to_tree(node<instance*>* parent);
+		std::vector<node<instance*>*> getchildren() const;
+		bool has_component(std::string const& cname);
+		virtual unsigned int get_explorer_icon() const { return 0; }
+		void remove();
 
-	instance() = default;
-	explicit instance(std::string const& instname) : name(instname) {}
-	instance(node<instance*>* parent, std::string const& _name) : name(_name) { add_to_tree(parent); }
-};
+		component* getcomponent(std::string_view const& cname);
+
+		instance() = default;
+		explicit instance(std::string const& instname) : name(instname) {}
+		instance(node<instance*>* parent, std::string const& _name) : name(_name) { add_to_tree(parent); }
+	};
+
+}
+
 
