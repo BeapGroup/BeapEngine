@@ -136,12 +136,20 @@
     <ClCompile Include="glad.c" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Mesh.cpp" />
+    <ClCompile Include="src\Model.cpp" />
+    <ClCompile Include="src\renderer\EBO.cpp" />
+    <ClCompile Include="src\renderer\VAO.cpp" />
+    <ClCompile Include="src\renderer\VBO.cpp" />
     <ClCompile Include="src\thirdparty\stb_image.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\hierarchy\hierarchy.h" />
     <ClInclude Include="src\math\tree.h" />
     <ClInclude Include="src\Mesh.h" />
+    <ClInclude Include="src\Model.h" />
+    <ClInclude Include="src\renderer\EBO.h" />
+    <ClInclude Include="src\renderer\VAO.h" />
+    <ClInclude Include="src\renderer\VBO.h" />
     <ClInclude Include="src\Shader.h" />
     <ClInclude Include="src\thirdparty\stb_image.h" />
   </ItemGroup>

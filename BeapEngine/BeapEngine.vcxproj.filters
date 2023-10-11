@@ -19,6 +19,9 @@
     <Filter Include="Source Files\Thirdparty">
       <UniqueIdentifier>{5babbd5f-b0a4-47a9-a342-2625d546a5af}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Renderer">
+      <UniqueIdentifier>{9df14fda-7210-42b1-a120-0d5d8837f06d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -33,6 +36,18 @@
     <ClCompile Include="src\thirdparty\stb_image.cpp">
       <Filter>Source Files\Thirdparty</Filter>
     </ClCompile>
+    <ClCompile Include="src\renderer\VAO.cpp">
+      <Filter>Source Files\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\renderer\VBO.cpp">
+      <Filter>Source Files\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\renderer\EBO.cpp">
+      <Filter>Source Files\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Model.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Mesh.h">
@@ -44,6 +59,18 @@
     <ClInclude Include="src\thirdparty\stb_image.h">
       <Filter>Source Files\Thirdparty</Filter>
     </ClInclude>
+    <ClInclude Include="src\renderer\VAO.h">
+      <Filter>Source Files\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\renderer\VBO.h">
+      <Filter>Source Files\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\renderer\EBO.h">
+      <Filter>Source Files\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Model.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="resources\shaders\default.vert">
@@ -52,14 +79,5 @@
     <None Include="resources\shaders\default.frag">
       <Filter>Resource Files\Shaders</Filter>
     </None>
-    </ClCompile>
-    <ClCompile Include="src\math.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="src\math.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
 </Project>
