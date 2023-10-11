@@ -16,6 +16,8 @@ int SCR_HEIGHT = 600;
 
 void on_framebuf_resize(GLFWwindow*, int width, int height) {
 	glViewport(0, 0, width, height);
+	SCR_WIDTH = width;
+	SCR_HEIGHT = height;
 }
 
 glm::vec3 cameraPos = glm::vec3(0.0f, 0.0f, 3.0f);
