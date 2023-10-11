@@ -9,6 +9,7 @@
 #include "Shader.h"
 #include "Mesh.h"
 #include "math/tree.h"
+#include "Model.h"
 #include "hierarchy/hierarchy.h"
 
 int SCR_WIDTH = 800;
@@ -16,6 +17,8 @@ int SCR_HEIGHT = 600;
 
 void on_framebuf_resize(GLFWwindow*, int width, int height) {
 	glViewport(0, 0, width, height);
+	SCR_WIDTH = width;
+	SCR_HEIGHT = height;
 }
 
 glm::vec3 cameraPos = glm::vec3(0.0f, 0.0f, 3.0f);
@@ -61,11 +64,14 @@ int main() {
 	
 	// TODO : Shader pre-processing system and manager
 	Shader defaultShader("resources/shaders/default.vert","resources/shaders/default.frag");
-	Mesh cube;
-	
-	cube.shader = &defaultShader;
-	cube.SetupMesh();
-	cube.SetupTexture("resources/textures/mayro.png");
+	Model cube("resources/models/monkey.gltf");
+	for (int i = 0; i < cube.meshes.size(); i++)
+	{
+		cube.meshes.at(i).shader = &defaultShader;
+		cube.meshes.at(i).SetupTexture("resources/textures/mayro.png");
+		cube.meshes.at(i).eulerRotation = glm::vec3(0, -90, 0);
+	}
+
 
 	double lastTime = glfwGetTime();
 	while (!glfwWindowShouldClose(window)) {
@@ -80,9 +86,6 @@ int main() {
 
 		glm::mat4 view = glm::lookAt(cameraPos, cameraPos + cameraFront, cameraUp);
 		defaultShader.setMat4("view", view);
-
-		cube.eulerRotation.x += dt * 50.0f;
-		cube.eulerRotation.y += dt * 50.0f;
 
 		cube.Draw();
 
