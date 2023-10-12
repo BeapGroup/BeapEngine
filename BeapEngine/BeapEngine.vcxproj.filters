@@ -26,7 +26,6 @@
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Mesh.cpp" />
     <ClCompile Include="src\thirdparty\stb_image.cpp" />
-    <ClCompile Include="src\hierarchy\hierarchy.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -53,6 +52,9 @@
     <ClCompile Include="src\Model.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\hierarchy\instances\instance.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Mesh.h">
@@ -76,6 +78,9 @@
     <ClInclude Include="src\Model.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\hierarchy\instances\instance.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="resources\shaders\default.vert">
@@ -84,12 +89,10 @@
     <None Include="resources\shaders\default.frag">
       <Filter>Resource Files\Shaders</Filter>
     </None>
-    <ClInclude Include="src\hierarchy\hierarchy.h" />
     <ClInclude Include="src\math\tree.h" />
     <ClInclude Include="src\Mesh.h" />
     <ClInclude Include="src\Shader.h" />
     <ClInclude Include="src\thirdparty\stb_image.h" />
-    <ClInclude Include="src\hierarchy\IRenderable.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="resources\shaders\default.frag" />

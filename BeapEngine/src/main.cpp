@@ -10,7 +10,7 @@
 #include "Mesh.h"
 #include "math/tree.h"
 #include "Model.h"
-#include "hierarchy/instance.h"
+#include "hierarchy/instances/instance.h"
 
 int SCR_WIDTH = 800;
 int SCR_HEIGHT = 600;
