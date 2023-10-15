@@ -13,8 +13,13 @@ namespace beap {
 		void render() override { model->Draw(); }
 		std::string_view instance_type() const override { return "modelObject"; }
 
+		void apply_to_meshes(std::function<void(Mesh*)> const& apply);
+		void apply_shader(Shader s) { apply_to_meshes([s](Mesh* m) {*m->shader = s; }); }
+
 		modelObject() = default;
 		explicit modelObject(Model* m) : model(m) {}
+		modelObject(node<instance*>* parent, std::string const& instname, Model* m) 
+			: gameObject(glm::vec3(0), instname, parent), model(m) {}
 	};
 
 }

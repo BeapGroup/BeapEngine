@@ -136,6 +136,8 @@
     <ClCompile Include="glad.c" />
     <ClCompile Include="src\hierarchy\instances\gameobject.cpp" />
     <ClCompile Include="src\hierarchy\instances\instance.cpp" />
+    <ClCompile Include="src\hierarchy\instances\modelobject.cpp" />
+    <ClCompile Include="src\hierarchy\instances\scene.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\renderer\Mesh.cpp" />
     <ClCompile Include="src\renderer\Model.cpp" />

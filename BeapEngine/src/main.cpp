@@ -10,7 +10,10 @@
 #include "renderer/Mesh.h"
 #include "math/tree.h"
 #include "renderer/Model.h"
+
 #include "hierarchy/instances/instance.h"
+#include "hierarchy/instances/scene.h"
+#include "hierarchy/instances/modelobject.h"
 
 int SCR_WIDTH = 800;
 int SCR_HEIGHT = 600;
@@ -19,6 +22,7 @@ void on_framebuf_resize(GLFWwindow*, int width, int height) {
 	glViewport(0, 0, width, height);
 	SCR_WIDTH = width;
 	SCR_HEIGHT = height;
+	std::cout << "nigga";
 }
 
 glm::vec3 cameraPos = glm::vec3(0.0f, 0.0f, 3.0f);
@@ -56,16 +60,21 @@ int main() {
 	glViewport(0, 0, SCR_WIDTH, SCR_HEIGHT);
 	glfwSetFramebufferSizeCallback(window, on_framebuf_resize);
 
-	
-	// TODO : Shader pre-processing system and manager
-	beap::Shader defaultShader("resources/shaders/default.vert","resources/shaders/default.frag");
-	beap::Model cube("resources/models/monkey.gltf");
-	for (int i = 0; i < cube.meshes.size(); i++)
-	{
-		cube.meshes.at(i).shader = &defaultShader;
-		cube.meshes.at(i).SetupTexture("resources/textures/mayro.png");
-		cube.meshes.at(i).eulerRotation = glm::vec3(0, -90, 0);
-	}
+	beap::instance root("root");
+	beap::instance::create_hierarchy(&root);
+
+	beap::scene scene1(root.in_tree, "scene 1");
+	beap::camera camera1(scene1.in_tree, "camera 1", glm::vec3(0,0,3), glm::vec2(SCR_WIDTH, SCR_HEIGHT));
+	scene1.find_camera();
+
+	beap::Shader defaultShader("resources/shaders/default.vert", "resources/shaders/default.frag");
+	beap::modelObject monker(scene1.in_tree, "monker", new beap::Model("resources/models/monkey.gltf"));
+
+	monker.apply_to_meshes([&defaultShader](beap::Mesh* m) {
+		m->shader = &defaultShader;
+		m->SetupTexture("resources/textures/mayro.png");
+		m->eulerRotation = glm::vec3(0, -90, 0);
+		});
 
 
 	double lastTime = glfwGetTime();
@@ -75,14 +84,7 @@ int main() {
 		glClearColor(0.2f, 0.7f, 0.6f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		defaultShader.use();
-		glm::mat4 projection = glm::perspective(glm::radians(45.0f), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
-		defaultShader.setMat4("projection", projection);
-
-		glm::mat4 view = glm::lookAt(cameraPos, cameraPos + cameraFront, cameraUp);
-		defaultShader.setMat4("view", view);
-
-		cube.Draw();
+		scene1.render_scene(defaultShader);
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();
