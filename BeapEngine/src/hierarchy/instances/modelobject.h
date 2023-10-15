@@ -12,6 +12,8 @@ namespace beap {
 
 		void render() override { model->Draw(); }
 		std::string_view instance_type() const override { return "modelObject"; }
+		void move(glm::f32vec3 shift) override;
+		void setPosition(glm::f32vec3 pos) override;
 
 		void apply_to_meshes(std::function<void(Mesh*)> const& apply);
 		void apply_shader(Shader s) { apply_to_meshes([s](Mesh* m) {*m->shader = s; }); }

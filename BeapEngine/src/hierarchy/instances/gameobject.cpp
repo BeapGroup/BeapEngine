@@ -13,4 +13,12 @@ namespace beap {
 		rotation = gbj->rotation;
 		scale = gbj->scale;
 	}
+
+	void gameObject::move(glm::f32vec3 shift) {
+		position += shift;
+	}
+
+	void gameObject::setPosition(glm::f32vec3 pos) {
+		position = pos;
+	}
 }

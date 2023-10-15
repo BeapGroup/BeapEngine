@@ -76,6 +76,9 @@ int main() {
 		m->eulerRotation = glm::vec3(0, -90, 0);
 		});
 
+	monker.apply_to_meshes([](beap::Mesh* m) {
+		m->translation = glm::vec3(1, 1, 1);
+		});
 
 	double lastTime = glfwGetTime();
 	while (!glfwWindowShouldClose(window)) {
@@ -84,6 +87,7 @@ int main() {
 		glClearColor(0.2f, 0.7f, 0.6f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+		monker.move(glm::vec3(0, 0, -0.001f));
 		scene1.render_scene(defaultShader);
 
 		glfwSwapBuffers(window);

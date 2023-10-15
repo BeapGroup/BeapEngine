@@ -11,7 +11,7 @@ namespace beap {
 	}
 
 	glm::mat4 camera::getProjection() const {
-		return glm::perspective(glm::radians(FOV / 2), viewport.x / viewport.y, 0.1f, 100.0f);
+		return glm::perspective(glm::radians(FOV / 2), viewport.x / viewport.y, 0.1f, 500.0f);
 	}
 
 	glm::mat4 camera::getView() const {
