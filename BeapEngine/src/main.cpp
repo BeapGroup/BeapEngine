@@ -6,10 +6,10 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
-#include "Shader.h"
-#include "Mesh.h"
+#include "renderer/Shader.h"
+#include "renderer/Mesh.h"
 #include "math/tree.h"
-#include "Model.h"
+#include "renderer/Model.h"
 #include "hierarchy/instances/instance.h"
 
 int SCR_WIDTH = 800;

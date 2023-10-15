@@ -3,7 +3,7 @@
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
-#include "thirdparty/stb_image.h"
+#include "../thirdparty/stb_image.h"
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
@@ -14,8 +14,8 @@
 #include <string>
 #include "Shader.h"
 #include <vector>
-#include "renderer/VAO.h"
-#include "renderer/EBO.h"
+#include "gl/VAO.h"
+#include "gl/EBO.h"
 
 namespace beap {
 
