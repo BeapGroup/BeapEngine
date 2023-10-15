@@ -52,6 +52,9 @@
     <ClCompile Include="src\hierarchy\instances\instance.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\hierarchy\instances\gameobject.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\renderer\Mesh.h">
@@ -76,6 +79,15 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="src\hierarchy\instances\instance.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\hierarchy\instances\gameobject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\hierarchy\instances\modelobject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\hierarchy\instances\scene.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

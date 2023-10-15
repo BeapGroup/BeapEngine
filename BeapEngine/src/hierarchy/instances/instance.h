@@ -19,8 +19,10 @@ namespace beap {
 		void add_to_tree(node<instance*>* parent);
 		std::vector<node<instance*>*> getchildren() const;
 		instance* getparent() const;
-		virtual unsigned int get_explorer_icon() const { return 0; }
 		void remove();
+
+		virtual unsigned int get_explorer_icon() const { return 0; }
+		virtual std::string_view instance_type() const { return "instance"; }
 
 		instance() = default;
 		explicit instance(std::string const& instname) : name(instname) {}

@@ -13,9 +13,6 @@ namespace beap {
 
 	void instance::remove() {
 		in_tree->remove_parent();
-		for (auto c : components) {
-			delete c;
-		}
 		delete in_tree;
 	}
 

@@ -134,6 +134,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="glad.c" />
+    <ClCompile Include="src\hierarchy\instances\gameobject.cpp" />
     <ClCompile Include="src\hierarchy\instances\instance.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\renderer\Mesh.cpp" />
@@ -144,7 +145,10 @@
     <ClCompile Include="src\thirdparty\stb_image.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\hierarchy\instances\gameobject.h" />
     <ClInclude Include="src\hierarchy\instances\instance.h" />
+    <ClInclude Include="src\hierarchy\instances\modelobject.h" />
+    <ClInclude Include="src\hierarchy\instances\scene.h" />
     <ClInclude Include="src\math\tree.h" />
     <ClInclude Include="src\renderer\Mesh.h" />
     <ClInclude Include="src\renderer\Model.h" />
