@@ -21,4 +21,12 @@ namespace beap {
 	void gameObject::setPosition(glm::f32vec3 pos) {
 		position = pos;
 	}
+
+	void gameObject::setRotation(glm::f32vec3 euler) {
+		rotation = euler;
+	}
+
+	void gameObject::setScale(glm::f32vec3 scalar) {
+		scale = scalar;
+	}
 }

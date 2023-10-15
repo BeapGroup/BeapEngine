@@ -22,7 +22,6 @@ void on_framebuf_resize(GLFWwindow*, int width, int height) {
 	glViewport(0, 0, width, height);
 	SCR_WIDTH = width;
 	SCR_HEIGHT = height;
-	std::cout << "nigga";
 }
 
 glm::vec3 cameraPos = glm::vec3(0.0f, 0.0f, 3.0f);
@@ -76,10 +75,6 @@ int main() {
 		m->eulerRotation = glm::vec3(0, -90, 0);
 		});
 
-	monker.apply_to_meshes([](beap::Mesh* m) {
-		m->translation = glm::vec3(1, 1, 1);
-		});
-
 	double lastTime = glfwGetTime();
 	while (!glfwWindowShouldClose(window)) {
 		double now = glfwGetTime();
@@ -87,7 +82,7 @@ int main() {
 		glClearColor(0.2f, 0.7f, 0.6f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		monker.move(glm::vec3(0, 0, -0.001f));
+		monker.setScale(glm::vec3(1, 1, monker.scale.z * (1 + 0.1 * dt)));
 		scene1.render_scene(defaultShader);
 
 		glfwSwapBuffers(window);

@@ -9,7 +9,7 @@ namespace beap {
 	public:
 		glm::f32vec3 position;
 		glm::f32vec3 rotation = glm::f32vec3(0);
-		glm::f32vec3 scale = glm::u32vec3(0);
+		glm::f32vec3 scale = glm::u32vec3(1);
 
 		std::string_view instance_type() const override { return "gameObject"; }
 		void reset_transform();
@@ -18,6 +18,8 @@ namespace beap {
 		virtual void render() = 0;
 		virtual void move(glm::f32vec3 shift);
 		virtual void setPosition(glm::f32vec3 pos);
+		virtual void setRotation(glm::f32vec3 euler);
+		virtual void setScale(glm::f32vec3 scalar);
 
 		gameObject() = default;
 		gameObject(glm::u32vec3 pos, glm::f32vec3 rot, glm::u32vec3 scl)

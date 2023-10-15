@@ -21,5 +21,18 @@ namespace beap {
 			m->translation = pos;
 			});
 	}
+	
+	void modelObject::setRotation(glm::f32vec3 euler) {
+		rotation = euler;
+		apply_to_meshes([euler](Mesh* m) {
+			m->eulerRotation = euler;
+			});
+	}
 
+	void modelObject::setScale(glm::f32vec3 scalar) {
+		scale = scalar;
+		apply_to_meshes([scalar](Mesh* m) {
+			m->scale = scalar;
+			});
+	}
 }
