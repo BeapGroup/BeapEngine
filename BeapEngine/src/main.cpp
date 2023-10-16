@@ -15,6 +15,8 @@
 #include "hierarchy/instances/scene.h"
 #include "hierarchy/instances/modelobject.h"
 
+#include "BeapEditor.h"
+
 int SCR_WIDTH = 800;
 int SCR_HEIGHT = 600;
 
@@ -91,17 +93,28 @@ int main() {
 		m->eulerRotation = glm::vec3(0, -90, 0);
 		});
 
+	beap::editor::BeapEditor editor(window, &scene1);
+	editor.Init();
+
 	double lastTime = glfwGetTime();
 	while (!glfwWindowShouldClose(window)) {
+		
 		double now = glfwGetTime();
 		float dt = now - lastTime;
+		editor.PreRender();
+
+
 		glClearColor(0.2f, 0.7f, 0.6f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		defaultShader.setVec3("lightPos", lightPos);
 
+
 		scene1.update(window, dt);
 		scene1.render_scene(defaultShader);
+		
+		editor.EditorLoop();
+		editor.Render();
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();
