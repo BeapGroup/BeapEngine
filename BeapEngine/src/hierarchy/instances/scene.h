@@ -10,7 +10,7 @@ namespace beap {
 	class camera : public instance {
 	public:
 		bool active = true;
-		glm::u32vec3 position = glm::vec3(0.0f, 0.0f, 3.0f);
+		glm::f32vec3 position = glm::vec3(0.0f, 0.0f, 3.0f);
 		glm::f32vec2 viewport;
 		float FOV = 90.0;
 
@@ -20,6 +20,8 @@ namespace beap {
 		glm::f32vec3 getForward() const;
 
 		std::string_view instance_type() const override { return "camera"; }
+		//TEMPORARY: movement shouldn't be baked into camera functionality
+		void update(GLFWwindow* w, float dt) override;
 
 		camera(glm::u32vec3 pos, glm::u32vec2 vp) : position(pos), viewport(vp) {}
 		camera(node<instance*>* parent, std::string const& instname, glm::u32vec3 pos, glm::u32vec2 vp)
@@ -36,6 +38,7 @@ namespace beap {
 		camera* active_camera;
 
 		void render_scene(Shader s) const;
+		void update(GLFWwindow* w, float dt) override;
 		void find_camera();
 
 		std::string_view instance_type() const override { return "scene"; }

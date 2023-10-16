@@ -73,14 +73,14 @@ int main() {
 	beap::camera camera1(scene1.in_tree, "camera 1", glm::vec3(0,0,3), glm::vec2(SCR_WIDTH, SCR_HEIGHT));
 	scene1.find_camera();
 
-	beap::Shader defaultShader("resources/shaders/default.vert", "resources/shaders/default.frag");
+	beap::Shader defaultShader("resources/shaders/default.vert", "resources/shaders/no_texture.frag");
 	beap::modelObject monker(scene1.in_tree, "monker", new beap::Model("resources/models/monkey.gltf"));
-	auto p = beap::Model::Plane(glm::vec3(-1, -1, -1), glm::vec3(1, -1, 1));
-	beap::modelObject plane(scene1.in_tree, "planer", &p);
+	auto c = beap::Model::Cube(glm::vec3(-1, -1, -1), glm::vec3(1, 1, 1));
+	beap::modelObject cuber(scene1.in_tree, "planer", &c);
 	
-	plane.move(glm::vec3(.5f, -.5f, -.5f));
+	cuber.move(glm::vec3(.5f, -.5f, -.5f));
 
-	plane.apply_to_meshes([&defaultShader](beap::Mesh* m) {
+	cuber.apply_to_meshes([&defaultShader](beap::Mesh* m) {
 		m->shader = &defaultShader;
 		m->SetupTexture("resources/textures/mayro.png");
 		//m->eulerRotation = glm::vec3(0, -90, 0);
@@ -100,6 +100,7 @@ int main() {
 
 		defaultShader.setVec3("lightPos", lightPos);
 
+		scene1.update(window, dt);
 		scene1.render_scene(defaultShader);
 
 		glfwSwapBuffers(window);

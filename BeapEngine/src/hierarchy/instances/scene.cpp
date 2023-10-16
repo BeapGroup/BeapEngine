@@ -22,6 +22,17 @@ namespace beap {
 		return front_vector;
 	}
 
+	void camera::update(GLFWwindow* w, float dt) {
+		if (glfwGetKey(w, GLFW_KEY_W) == GLFW_PRESS)
+			position += front_vector * dt;
+		if (glfwGetKey(w, GLFW_KEY_S) == GLFW_PRESS)
+			position -= front_vector * dt;
+		if (glfwGetKey(w, GLFW_KEY_A) == GLFW_PRESS)
+			position -= glm::normalize(glm::cross(front_vector, glm::vec3(0,1,0))) * dt;
+		if (glfwGetKey(w, GLFW_KEY_D) == GLFW_PRESS)
+			position += glm::normalize(glm::cross(front_vector, glm::vec3(0, 1, 0))) * dt;
+	}
+
 	void scene::render_scene(Shader s) const {
 		s.use();
 		s.setMat4("projection", active_camera->getProjection());
@@ -31,6 +42,12 @@ namespace beap {
 			if (child_instance->instance_type() == "modelObject") {
 				((modelObject*)child_instance)->render();
 			}
+		}
+	}
+
+	void scene::update(GLFWwindow* w, float dt) {
+		for (auto& instnode : getchildren()) {
+			instnode->data->update(w, dt);
 		}
 	}
 

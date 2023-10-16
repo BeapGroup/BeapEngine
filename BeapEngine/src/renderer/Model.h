@@ -18,6 +18,7 @@ public:
 	std::vector<Mesh> meshes;
 
 	static Model Plane(glm::f32vec3 p1, glm::f32vec3 p2);
+	static Model Cube(glm::f32vec3 p1, glm::f32vec3 p2);
 private:
 	// Variables for easy access
 	const char* file;

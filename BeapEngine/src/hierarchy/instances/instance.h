@@ -1,9 +1,11 @@
 #pragma once
 
+#define GLFW_INCLUDE_NONE
+
 #include <string>
-#include <map>
 #include <algorithm>
 #include <glm/glm.hpp>
+#include <GLFW/glfw3.h>
 
 #include "../../math/tree.h"
 
@@ -23,6 +25,7 @@ namespace beap {
 
 		virtual unsigned int get_explorer_icon() const { return 0; }
 		virtual std::string_view instance_type() const { return "instance"; }
+		virtual void update(GLFWwindow* w, float dt) { return; }
 
 		instance() = default;
 		explicit instance(std::string const& instname) : name(instname) {}

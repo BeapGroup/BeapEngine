@@ -300,7 +300,7 @@ namespace beap {
 	Model Model::Plane(glm::vec3 p1, glm::vec3 p2) {
 		auto model = Model();
 		auto normal = glm::vec3(0, 1, 0);
-		auto color = glm::vec3(0, 0, 0);
+		auto color = glm::vec3(0);
 
 		auto v_0 = Vertex(p1, normal, color, glm::vec2(0, 0));
 		auto v_1 = Vertex(glm::vec3(p2.x, p1.y, p1.z), normal, color, glm::vec2(1, 0));
@@ -309,6 +309,44 @@ namespace beap {
 
 		auto vertices = std::vector<Vertex>{ v_0, v_1, v_2, v_3 };
 		auto indices = std::vector<unsigned int>{ 0, 1, 3, 0, 2, 3 };
+
+		model.meshes.emplace_back(vertices, indices);
+		return model;
+	}
+
+	Model Model::Cube(glm::vec3 p1, glm::vec3 p2) {
+		float n = glm::sqrt(2) / 2;
+		auto model = Model();
+		auto color = glm::vec3(0);
+		
+
+		// top plane vertices
+		auto tp_v0 = Vertex(p1, glm::vec3(-n, n, -n), color, glm::vec2(0, 0));
+		auto tp_v1 = Vertex(glm::vec3(p2.x, p1.y, p1.z), glm::vec3(n, n, -n), color, glm::vec2(1, 0));
+		auto tp_v2 = Vertex(glm::vec3(p1.x, p1.y, p2.z), glm::vec3(-n, n, n), color, glm::vec2(0, 1));
+		auto tp_v3 = Vertex(glm::vec3(p2.x, p1.y, p2.z), glm::vec3(n, n, n), color, glm::vec2(1, 1));
+
+		// bottom plane vertices
+		auto bp_v0 = Vertex(glm::vec3(p1.x, p2.y, p1.z), glm::vec3(-n, -n, -n), color, glm::vec2(0, 0));
+		auto bp_v1 = Vertex(glm::vec3(p2.x, p2.y, p1.z), glm::vec3(n, -n, -n), color, glm::vec2(1, 0));
+		auto bp_v2 = Vertex(glm::vec3(p1.x, p2.y, p2.z), glm::vec3(-n, -n, n), color, glm::vec2(0, 1));
+		auto bp_v3 = Vertex(p2, glm::vec3(n, n, n), color, glm::vec2(1, 1));
+
+		auto vertices = std::vector<Vertex>{ tp_v0, tp_v1, tp_v2, tp_v3, bp_v0, bp_v1, bp_v2, bp_v3, };
+		auto indices = std::vector<unsigned int>{
+			//top plane
+			0, 1, 3, 0, 2, 3,
+			//left plane
+			0, 2, 4, 2, 6, 4,
+			// right plane
+			1, 3, 5, 3, 7, 5,
+			//bottom plane
+			2, 3, 7, 2, 6, 7,
+			//back plane
+			0, 1, 4, 1, 5, 4,
+			//front plane
+			2, 3, 6, 3, 6, 7
+		};
 
 		model.meshes.emplace_back(vertices, indices);
 		return model;
