@@ -13,6 +13,9 @@ namespace beap {
 		glm::vec3 normal;
 		glm::vec3 color;
 		glm::vec2 texUV;
+
+		Vertex(glm::vec3 pos, glm::vec3 norm, glm::vec3 col, glm::vec2 uv)
+			: position(pos), normal(norm), color(col), texUV(uv) {}
 	};
 
 

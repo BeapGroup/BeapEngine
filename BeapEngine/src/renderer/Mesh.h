@@ -42,8 +42,6 @@ namespace beap {
         void Draw();
         void SetupMesh();
         void SetupTexture(const char* texturePath);
-
-        //static Mesh Plane(glm::f32vec3 p1, glm::f32vec3 p2);
     };
 
 }

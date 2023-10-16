@@ -75,11 +75,19 @@ int main() {
 
 	beap::Shader defaultShader("resources/shaders/default.vert", "resources/shaders/default.frag");
 	beap::modelObject monker(scene1.in_tree, "monker", new beap::Model("resources/models/monkey.gltf"));
-	//beap::modelObject monker2(scene1.in_tree, "monker", new beap::Model("resources/models/monkey.gltf"));
+	auto p = beap::Model::Plane(glm::vec3(-1, -1, -1), glm::vec3(1, -1, 1));
+	beap::modelObject plane(scene1.in_tree, "planer", &p);
+	
+	plane.move(glm::vec3(.5f, -.5f, -.5f));
 
+	plane.apply_to_meshes([&defaultShader](beap::Mesh* m) {
+		m->shader = &defaultShader;
+		m->SetupTexture("resources/textures/mayro.png");
+		//m->eulerRotation = glm::vec3(0, -90, 0);
+		});
 	monker.apply_to_meshes([&defaultShader](beap::Mesh* m) {
 		m->shader = &defaultShader;
-		//m->SetupTexture("resources/textures/mayro.png");
+		m->SetupTexture("resources/textures/mayro.png");
 		m->eulerRotation = glm::vec3(0, -90, 0);
 		});
 

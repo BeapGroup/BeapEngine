@@ -297,5 +297,21 @@ namespace beap {
 		return vectors;
 	}
 
+	Model Model::Plane(glm::vec3 p1, glm::vec3 p2) {
+		auto model = Model();
+		auto normal = glm::vec3(0, 1, 0);
+		auto color = glm::vec3(0, 0, 0);
+
+		auto v_0 = Vertex(p1, normal, color, glm::vec2(0, 0));
+		auto v_1 = Vertex(glm::vec3(p2.x, p1.y, p1.z), normal, color, glm::vec2(1, 0));
+		auto v_2 = Vertex(glm::vec3(p1.x, p1.y, p2.z), normal, color, glm::vec2(0, 1));
+		auto v_3 = Vertex(p2, normal, color, glm::vec2(1, 1));
+
+		auto vertices = std::vector<Vertex>{ v_0, v_1, v_2, v_3 };
+		auto indices = std::vector<unsigned int>{ 0, 1, 3, 0, 2, 3 };
+
+		model.meshes.emplace_back(vertices, indices);
+		return model;
+	}
 }
 

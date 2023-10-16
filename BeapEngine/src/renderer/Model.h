@@ -12,10 +12,12 @@ class Model
 public:
 	// Loads in a model from a file and stores tha information in 'data', 'JSON', and 'file'
 	Model(const char* file);
+	Model() = default;
 
 	void Draw();
 	std::vector<Mesh> meshes;
 
+	static Model Plane(glm::f32vec3 p1, glm::f32vec3 p2);
 private:
 	// Variables for easy access
 	const char* file;
