@@ -73,7 +73,7 @@ int main() {
 	beap::camera camera1(scene1.in_tree, "camera 1", glm::vec3(0,0,3), glm::vec2(SCR_WIDTH, SCR_HEIGHT));
 	scene1.find_camera();
 
-	beap::Shader defaultShader("resources/shaders/default.vert", "resources/shaders/no_texture.frag");
+	beap::Shader defaultShader("resources/shaders/default.vert", "resources/shaders/default.frag");
 	beap::modelObject monker(scene1.in_tree, "monker", new beap::Model("resources/models/monkey.gltf"));
 	//beap::modelObject monker2(scene1.in_tree, "monker", new beap::Model("resources/models/monkey.gltf"));
 
