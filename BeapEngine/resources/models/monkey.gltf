@@ -20,7 +20,7 @@
 	],
 	"meshes":[
 		{
-			"name":"Suzanne",
+			"name":"Suzanne.001",
 			"primitives":[
 				{
 					"attributes":{
@@ -37,7 +37,7 @@
 		{
 			"bufferView":0,
 			"componentType":5126,
-			"count":1966,
+			"count":556,
 			"max":[
 				1.3671875,
 				0.984375,
@@ -53,13 +53,13 @@
 		{
 			"bufferView":1,
 			"componentType":5126,
-			"count":1966,
+			"count":556,
 			"type":"VEC3"
 		},
 		{
 			"bufferView":2,
 			"componentType":5126,
-			"count":1966,
+			"count":556,
 			"type":"VEC2"
 		},
 		{
@@ -72,32 +72,32 @@
 	"bufferViews":[
 		{
 			"buffer":0,
-			"byteLength":23592,
+			"byteLength":6672,
 			"byteOffset":0,
 			"target":34962
 		},
 		{
 			"buffer":0,
-			"byteLength":23592,
-			"byteOffset":23592,
+			"byteLength":6672,
+			"byteOffset":6672,
 			"target":34962
 		},
 		{
 			"buffer":0,
-			"byteLength":15728,
-			"byteOffset":47184,
+			"byteLength":4448,
+			"byteOffset":13344,
 			"target":34962
 		},
 		{
 			"buffer":0,
 			"byteLength":5808,
-			"byteOffset":62912,
+			"byteOffset":17792,
 			"target":34963
 		}
 	],
 	"buffers":[
 		{
-			"byteLength":68720,
+			"byteLength":23600,
 			"uri":"monkey.bin"
 		}
 	]

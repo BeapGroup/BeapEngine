@@ -28,6 +28,9 @@ glm::vec3 cameraPos = glm::vec3(0.0f, 0.0f, 3.0f);
 glm::vec3 cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
 glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
 
+// TEMP
+glm::vec3 lightPos = glm::vec3(3.0f, 0.0f, 0.0f);
+
 int main() {
 
 	std::cout << "Initialising GLFW, GLAD and Window!" << std::endl;
@@ -86,6 +89,8 @@ int main() {
 		float dt = now - lastTime;
 		glClearColor(0.2f, 0.7f, 0.6f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+		defaultShader.setVec3("lightPos", lightPos);
 
 		scene1.render_scene(defaultShader);
 
