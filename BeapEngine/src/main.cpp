@@ -56,6 +56,10 @@ int main() {
 
 	glEnable(GL_DEPTH_TEST);
 
+	//enable blending (aka alpha channel in shaders)
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
 	glViewport(0, 0, SCR_WIDTH, SCR_HEIGHT);
 	glfwSetFramebufferSizeCallback(window, on_framebuf_resize);
 
@@ -66,12 +70,13 @@ int main() {
 	beap::camera camera1(scene1.in_tree, "camera 1", glm::vec3(0,0,3), glm::vec2(SCR_WIDTH, SCR_HEIGHT));
 	scene1.find_camera();
 
-	beap::Shader defaultShader("resources/shaders/default.vert", "resources/shaders/default.frag");
+	beap::Shader defaultShader("resources/shaders/default.vert", "resources/shaders/no_texture.frag");
 	beap::modelObject monker(scene1.in_tree, "monker", new beap::Model("resources/models/monkey.gltf"));
+	//beap::modelObject monker2(scene1.in_tree, "monker", new beap::Model("resources/models/monkey.gltf"));
 
 	monker.apply_to_meshes([&defaultShader](beap::Mesh* m) {
 		m->shader = &defaultShader;
-		m->SetupTexture("resources/textures/mayro.png");
+		//m->SetupTexture("resources/textures/mayro.png");
 		m->eulerRotation = glm::vec3(0, -90, 0);
 		});
 
@@ -82,7 +87,6 @@ int main() {
 		glClearColor(0.2f, 0.7f, 0.6f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		monker.setScale(glm::vec3(1, 1, monker.scale.z * (1 + 0.1 * dt)));
 		scene1.render_scene(defaultShader);
 
 		glfwSwapBuffers(window);

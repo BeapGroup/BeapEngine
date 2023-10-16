@@ -106,6 +106,7 @@
     </None>
     <ClInclude Include="src\math\tree.h" />
     <ClInclude Include="src\thirdparty\stb_image.h" />
+    <None Include="resources\shaders\no_texture.frag" />
   </ItemGroup>
   <ItemGroup>
     <None Include="resources\shaders\default.frag" />
