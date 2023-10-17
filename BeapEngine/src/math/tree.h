@@ -6,51 +6,51 @@
 namespace beap {
 
 	template <typename T>
-	struct node {
+	struct Node {
 
-		T data;
-		std::optional<node<T>*> parent;
-		std::vector<node<T>*> children;
+		T Contents;
+		std::optional<Node<T>*> Parent;
+		std::vector<Node<T>*> Children;
 
-		bool has_children() {
-			return children.size() > 0;
+		bool HasChildren() {
+			return Children.size() > 0;
 		}
 
-		void add_child(node<T>* child) {
-			child->parent = this;
-			children.push_back(child);
+		void AddChild(Node<T>* child) {
+			child->Parent = this;
+			Children.push_back(child);
 		}
-		void remove_child(node<T>* child) {
-			child->parent.reset();
-			auto i = std::find(children.begin(), children.end(), child);
-			if (i != children.end()) {
-				children.erase(i);
+		void RemoveChild(Node<T>* child) {
+			child->Parent.reset();
+			auto i = std::find(Children.begin(), Children.end(), child);
+			if (i != Children.end()) {
+				Children.erase(i);
 			}
 		}
-		void set_parent(node<T>* newparent) {
-			newparent->add_child(this);
-			parent = newparent;
+		void SetParent(Node<T>* newparent) {
+			newparent->AddChild(this);
+			Parent = newparent;
 		}
-		void remove_parent() {
-			if (parent.has_value()) {
-				parent.value()->remove_child(this);
-				parent.reset();
+		void RemoveParent() {
+			if (Parent.has_value()) {
+				Parent.value()->RemoveChild(this);
+				Parent.reset();
 			}
 		}
 
-		void traverse(std::function<void(node<T>*)> action) {
+		void Traverse(std::function<void(Node<T>*)> action) {
 			action(this);
-			if (has_children()) {
-				for (auto child : children) { child->traverse(action); }
+			if (HasChildren()) {
+				for (auto child : Children) { child->Traverse(action); }
 			}
 		}
 
-		node() = default;
-		explicit node(T value) : data(value) {}
+		Node() = default;
+		explicit Node(T value) : Contents(value) {}
 
-		bool operator==(const node& other) const
+		bool operator==(const Node& other) const
 		{
-			return data == other.data;
+			return Contents == other.Contents;
 		}
 	};
 

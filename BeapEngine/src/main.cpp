@@ -68,26 +68,26 @@ int main() {
 	glViewport(0, 0, SCR_WIDTH, SCR_HEIGHT);
 	glfwSetFramebufferSizeCallback(window, on_framebuf_resize);
 
-	beap::instance root("root");
-	beap::instance::create_hierarchy(&root);
+	beap::Instance root("root");
+	beap::Instance::CreateHierarchy(&root);
 
-	beap::scene scene1(root.in_tree, "scene 1");
-	beap::camera camera1(scene1.in_tree, "camera 1", glm::vec3(0,0,3), glm::vec2(SCR_WIDTH, SCR_HEIGHT));
-	scene1.find_camera();
+	beap::Scene scene1(root.in_tree, "scene 1");
+	beap::Camera camera1(scene1.in_tree, "camera 1", glm::vec3(0,0,3), glm::vec2(SCR_WIDTH, SCR_HEIGHT));
+	scene1.FindCamera();
 
 	beap::Shader defaultShader("resources/shaders/default.vert", "resources/shaders/no_texture.frag");
-	beap::modelObject monker(scene1.in_tree, "monker", new beap::Model("resources/models/monkey.gltf"));
+	beap::ModelObject monker(scene1.in_tree, "monker", new beap::Model("resources/models/monkey.gltf"));
 	auto c = beap::Model::Cube(glm::vec3(-1, -1, -1), glm::vec3(1, 1, 1));
-	beap::modelObject cuber(scene1.in_tree, "planer", &c);
+	beap::ModelObject cuber(scene1.in_tree, "planer", &c);
 	
-	cuber.move(glm::vec3(.5f, -.5f, -.5f));
+	cuber.Move(glm::vec3(.5f, -.5f, -.5f));
 
-	cuber.apply_to_meshes([&defaultShader](beap::Mesh* m) {
+	cuber.ApplyToMeshes([&defaultShader](beap::Mesh* m) {
 		m->shader = &defaultShader;
 		m->SetupTexture("resources/textures/mayro.png");
 		//m->eulerRotation = glm::vec3(0, -90, 0);
 		});
-	monker.apply_to_meshes([&defaultShader](beap::Mesh* m) {
+	monker.ApplyToMeshes([&defaultShader](beap::Mesh* m) {
 		m->shader = &defaultShader;
 		m->SetupTexture("resources/textures/mayro.png");
 		m->eulerRotation = glm::vec3(0, -90, 0);
@@ -109,10 +109,10 @@ int main() {
 
 		defaultShader.setVec3("lightPos", lightPos);
 
-		camera1.viewport = glm::vec2(SCR_WIDTH, SCR_HEIGHT);
+		camera1.Viewport = glm::vec2(SCR_WIDTH, SCR_HEIGHT);
 
-		scene1.update(window, dt);
-		scene1.render_scene(defaultShader);
+		scene1.Update(window, dt);
+		scene1.RenderScene(defaultShader);
 		
 		editor.EditorLoop();
 		editor.Render();

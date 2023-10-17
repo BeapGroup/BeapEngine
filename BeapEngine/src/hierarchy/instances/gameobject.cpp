@@ -2,31 +2,31 @@
 
 namespace beap {
 
-	void gameObject::reset_transform() {
-		position = glm::u32vec3(0);
-		rotation = glm::f32vec3(0);
-		scale = glm::u32vec3(0);
+	void GameObject::ResetTransform() {
+		Position = glm::u32vec3(0);
+		Rotation = glm::f32vec3(0);
+		Scale = glm::u32vec3(0);
 	}
 
-	void gameObject::copy_transform(gameObject const* gbj) {
-		position = gbj->position;
-		rotation = gbj->rotation;
-		scale = gbj->scale;
+	void GameObject::CopyTransform(GameObject const* gbj) {
+		Position = gbj->Position;
+		Rotation = gbj->Rotation;
+		Scale = gbj->Scale;
 	}
 
-	void gameObject::move(glm::f32vec3 shift) {
-		position += shift;
+	void GameObject::Move(glm::f32vec3 shift) {
+		Position += shift;
 	}
 
-	void gameObject::setPosition(glm::f32vec3 pos) {
-		position = pos;
+	void GameObject::SetPosition(glm::f32vec3 pos) {
+		Position = pos;
 	}
 
-	void gameObject::setRotation(glm::f32vec3 euler) {
-		rotation = euler;
+	void GameObject::SetRotation(glm::f32vec3 euler) {
+		Rotation = euler;
 	}
 
-	void gameObject::setScale(glm::f32vec3 scalar) {
-		scale = scalar;
+	void GameObject::SetScale(glm::f32vec3 scalar) {
+		Scale = scalar;
 	}
 }

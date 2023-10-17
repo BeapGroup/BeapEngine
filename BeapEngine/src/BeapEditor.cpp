@@ -1,6 +1,6 @@
 #include "BeapEditor.h"
 
-beap::editor::BeapEditor::BeapEditor(GLFWwindow* window, beap::scene* scene)
+beap::editor::BeapEditor::BeapEditor(GLFWwindow* window, beap::Scene* scene)
 {
     beap::editor::BeapEditor::window = window;
     beap::editor::BeapEditor::scene = scene;
@@ -38,17 +38,17 @@ void beap::editor::BeapEditor::EditorLoop()
     {
         
     }
-    for (int i = 0; i < scene->getchildren().size(); i++)
+    for (int i = 0; i < scene->GetChildren().size(); i++)
     {
-        if (scene->getchildren()[i]->data->getparent() == scene)
+        if (scene->GetChildren()[i]->Contents->GetParent() == scene)
         {
-            ImGui::Text(scene->getchildren()[i]->data->name.c_str());
+            ImGui::Text(scene->GetChildren()[i]->Contents->name.c_str());
 
         }
 
-        scene->getchildren()[i]->data->in_tree->traverse([](node<instance*>* mynode)
+        scene->GetChildren()[i]->Contents->in_tree->Traverse([](Node<Instance*>* mynode)
         {
-            ImGui::Text((" - " + mynode->data->name).c_str());
+            ImGui::Text((" - " + mynode->Contents->name).c_str());
         });
         
     }

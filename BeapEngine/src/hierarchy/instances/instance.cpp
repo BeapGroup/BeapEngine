@@ -1,29 +1,29 @@
 #include "instance.h"
 
 namespace beap {
-	void instance::add_to_tree(node<instance*>* parent) {
-		auto* newnode = new node<instance*>(this);
-		parent->add_child(newnode);
+	void Instance::AddToTree(Node<Instance*>* parent) {
+		auto* newnode = new Node<Instance*>(this);
+		parent->AddChild(newnode);
 		in_tree = newnode;
 	}
 
-	std::vector<node<instance*>*> instance::getchildren() const {
-		return in_tree->children;
+	std::vector<Node<Instance*>*> Instance::GetChildren() const {
+		return in_tree->Children;
 	}
 
-	void instance::remove() {
-		in_tree->remove_parent();
+	void Instance::Remove() {
+		in_tree->RemoveParent();
 		delete in_tree;
 	}
 
-	node<instance*>* instance::create_hierarchy(instance* root) {
-		auto nodeptr = new node<instance*>(root);
+	Node<Instance*>* Instance::CreateHierarchy(Instance* root) {
+		auto nodeptr = new Node<Instance*>(root);
 		root->in_tree = nodeptr;
 		return nodeptr;
 	}
 
-	instance* instance::getparent() const {
-		return in_tree->parent.value()->data;
+	Instance* Instance::GetParent() const {
+		return in_tree->Parent.value()->Contents;
 	}
 }
 

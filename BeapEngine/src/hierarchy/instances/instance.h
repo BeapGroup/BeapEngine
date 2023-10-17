@@ -11,25 +11,25 @@
 
 namespace beap {
 
-	class instance {
+	class Instance {
 	public:
 		std::string name;
-		node<instance*>* in_tree;
+		Node<Instance*>* in_tree;
 
-		static node<instance*>* create_hierarchy(instance* root);
+		static Node<Instance*>* CreateHierarchy(Instance* root);
 
-		void add_to_tree(node<instance*>* parent);
-		std::vector<node<instance*>*> getchildren() const;
-		instance* getparent() const;
-		void remove();
+		void AddToTree(Node<Instance*>* parent);
+		std::vector<Node<Instance*>*> GetChildren() const;
+		Instance* GetParent() const;
+		void Remove();
 
-		virtual unsigned int get_explorer_icon() const { return 0; }
-		virtual std::string_view instance_type() const { return "instance"; }
-		virtual void update(GLFWwindow* w, float dt) { return; }
+		virtual unsigned int GetExplorerIcon() const { return 0; }
+		virtual std::string_view InstanceType() const { return "instance"; }
+		virtual void Update(GLFWwindow* w, float dt) { return; }
 
-		instance() = default;
-		explicit instance(std::string const& instname) : name(instname) {}
-		instance(node<instance*>* parent, std::string const& _name) : name(_name) { add_to_tree(parent); }
+		Instance() = default;
+		explicit Instance(std::string const& instname) : name(instname) {}
+		Instance(Node<Instance*>* parent, std::string const& _name) : name(_name) { AddToTree(parent); }
 	};
 
 }

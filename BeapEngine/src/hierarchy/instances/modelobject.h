@@ -5,25 +5,25 @@
 
 namespace beap {
 
-	class modelObject : public gameObject {
+	class ModelObject : public GameObject {
 
 	public:
-		Model* model;
+		Model* LocalModel;
 
-		void render() override { model->Draw(); }
-		std::string_view instance_type() const override { return "modelObject"; }
-		void move(glm::f32vec3 shift) override;
-		void setPosition(glm::f32vec3 pos) override;
-		void setRotation(glm::f32vec3 euler) override;
-		void setScale(glm::f32vec3 scalar) override;
+		void Render() override { LocalModel->Draw(); }
+		std::string_view InstanceType() const override { return "modelObject"; }
+		void Move(glm::f32vec3 shift) override;
+		void SetPosition(glm::f32vec3 pos) override;
+		void SetRotation(glm::f32vec3 euler) override;
+		void SetScale(glm::f32vec3 scalar) override;
 
-		void apply_to_meshes(std::function<void(Mesh*)> const& apply);
-		void apply_shader(Shader s) { apply_to_meshes([s](Mesh* m) {*m->shader = s; }); }
+		void ApplyToMeshes(std::function<void(Mesh*)> const& apply);
+		void ApplyShader(Shader s) { ApplyToMeshes([s](Mesh* m) {*m->shader = s; }); }
 
-		modelObject() = default;
-		explicit modelObject(Model* m) : model(m) {}
-		modelObject(node<instance*>* parent, std::string const& instname, Model* m) 
-			: gameObject(glm::vec3(0), instname, parent), model(m) {}
+		ModelObject() = default;
+		explicit ModelObject(Model* m) : LocalModel(m) {}
+		ModelObject(Node<Instance*>* parent, std::string const& instname, Model* m) 
+			: GameObject(glm::vec3(0), instname, parent), LocalModel(m) {}
 	};
 
 }

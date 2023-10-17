@@ -2,36 +2,36 @@
 
 namespace beap {
 
-	void modelObject::apply_to_meshes(std::function<void(Mesh*)> const& apply) {
-		for (auto& mesh : model->meshes) {
+	void ModelObject::ApplyToMeshes(std::function<void(Mesh*)> const& apply) {
+		for (auto& mesh : LocalModel->meshes) {
 			apply(&mesh);
 		}
 	}
 
-	void modelObject::move(glm::f32vec3 shift) {
-		position += shift;
-		apply_to_meshes([shift](Mesh* m) {
+	void ModelObject::Move(glm::f32vec3 shift) {
+		Position += shift;
+		ApplyToMeshes([shift](Mesh* m) {
 			m->translation += shift;
 			});
 	}
 
-	void modelObject::setPosition(glm::f32vec3 pos) {
-		position = pos;
-		apply_to_meshes([pos](Mesh* m) {
+	void ModelObject::SetPosition(glm::f32vec3 pos) {
+		Position = pos;
+		ApplyToMeshes([pos](Mesh* m) {
 			m->translation = pos;
 			});
 	}
 	
-	void modelObject::setRotation(glm::f32vec3 euler) {
-		rotation = euler;
-		apply_to_meshes([euler](Mesh* m) {
+	void ModelObject::SetRotation(glm::f32vec3 euler) {
+		Rotation = euler;
+		ApplyToMeshes([euler](Mesh* m) {
 			m->eulerRotation = euler;
 			});
 	}
 
-	void modelObject::setScale(glm::f32vec3 scalar) {
-		scale = scalar;
-		apply_to_meshes([scalar](Mesh* m) {
+	void ModelObject::SetScale(glm::f32vec3 scalar) {
+		Scale = scalar;
+		ApplyToMeshes([scalar](Mesh* m) {
 			m->scale = scalar;
 			});
 	}

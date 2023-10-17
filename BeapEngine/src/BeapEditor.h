@@ -15,8 +15,8 @@ namespace beap
 		{
 			public:
 				GLFWwindow* window;
-				beap::scene* scene;
-				BeapEditor(GLFWwindow* window, beap::scene* scene);
+				beap::Scene* scene;
+				BeapEditor(GLFWwindow* window, beap::Scene* scene);
 				void Init();
 				void PreRender();
 				void EditorLoop();
