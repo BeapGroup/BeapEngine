@@ -109,6 +109,7 @@ int main() {
 
 		defaultShader.setVec3("lightPos", lightPos);
 
+		camera1.viewport = glm::vec2(SCR_WIDTH, SCR_HEIGHT);
 
 		scene1.update(window, dt);
 		scene1.render_scene(defaultShader);

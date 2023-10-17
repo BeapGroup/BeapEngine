@@ -58,5 +58,6 @@ namespace beap {
 				active_camera = (camera*)child_instance;
 			}
 		}
+
 	}
 }

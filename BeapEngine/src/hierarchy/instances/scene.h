@@ -45,6 +45,7 @@ namespace beap {
 
 		scene(std::string const& instname) : instance(instname) {}
 		scene(node<instance*>* parent, std::string const& instname) : instance(parent, instname) {}
+
 	};
 
 }
