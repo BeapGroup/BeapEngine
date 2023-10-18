@@ -53,6 +53,46 @@ void beap::editor::BeapEditor::EditorLoop()
         
     }
     ImGui::End();
+
+    RenderShaderManagerEditor();
+}
+
+void beap::editor::BeapEditor::RenderShaderManagerEditor()
+{
+    // Create a shader manager if it doesn't exist.
+    if (manager == nullptr)
+    {
+        ShaderManager m;
+        manager = &m;
+    }
+
+    ImGui::Begin("Shader Manager Shader Editor");
+    ImGui::InputText("GLSL Header", settings.GLSLHeader, 30);
+    ImGui::Checkbox("hasTexture", &settings.hasTexture);
+    ImGui::Checkbox("hasLighting", &settings.hasLighting);
+    if (settings.hasLighting)
+    {
+        ImGui::BeginListBox("Lighting Settings");
+            ImGui::Checkbox("useAmbientLighting", &settings.useAmbientLighting);
+            ImGui::Checkbox("isBlinnPhong", &settings.isBlinnPhong);
+            ImGui::Checkbox("hasDiffuse", &settings.hasDiffuse);
+            ImGui::Checkbox("hasSpecular", &settings.hasSpecular);
+            ImGui::Checkbox("hasShadows", &settings.hasShadows);
+            ImGui::Checkbox("hasPointShadows", &settings.hasPointShadows);
+        ImGui::EndListBox();
+    }
+    ImGui::Checkbox("hasNormalMaps", &settings.hasNormalMaps);
+    ImGui::Checkbox("hasParallaxOcclusionMaps", &settings.hasParallaxOcclusionMaps);
+
+    if (ImGui::Button("Compile Shader"))
+    {
+        beap::shaders::generation::FShaderGenerationResult result;
+        result = manager->GenerateFragmentShader(settings);
+        result.Success = true;
+        manager->cachedResult = result;
+    }
+
+    ImGui::End();
 }
 
 void beap::editor::BeapEditor::Render()

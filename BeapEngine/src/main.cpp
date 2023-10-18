@@ -17,6 +17,10 @@
 
 #include "BeapEditor.h"
 
+#include "utils/Light.h"
+
+#include "renderer/ShaderManager.h"
+
 int SCR_WIDTH = 800;
 int SCR_HEIGHT = 600;
 
@@ -62,8 +66,8 @@ int main() {
 	glEnable(GL_DEPTH_TEST);
 
 	//enable blending (aka alpha channel in shaders)
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	//glEnable(GL_BLEND);
+	//glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 	glViewport(0, 0, SCR_WIDTH, SCR_HEIGHT);
 	glfwSetFramebufferSizeCallback(window, on_framebuf_resize);
@@ -75,7 +79,14 @@ int main() {
 	beap::Camera camera1(scene1.in_tree, "camera 1", glm::vec3(0,0,3), glm::vec2(SCR_WIDTH, SCR_HEIGHT));
 	scene1.FindCamera();
 
-	beap::Shader defaultShader("resources/shaders/default.vert", "resources/shaders/no_texture.frag");
+	beap::ShaderManager shaderManager;
+
+	beap::Shader defaultShader("resources/shaders/default.vert", "resources/shaders/default.frag");
+	beap::Shader billboardShader("resources/shaders/billboard.vert", "resources/shaders/default.frag");
+
+	shaderManager.AddShader(&defaultShader);
+	shaderManager.AddShader(&billboardShader);
+
 	beap::ModelObject monker(scene1.in_tree, "monker", new beap::Model("resources/models/monkey.gltf"));
 	auto c = beap::Model::Cube(glm::vec3(-1, -1, -1), glm::vec3(1, 1, 1));
 	beap::ModelObject cuber(scene1.in_tree, "planer", &c);
@@ -92,6 +103,18 @@ int main() {
 		m->SetupTexture("resources/textures/mayro.png");
 		m->eulerRotation = glm::vec3(0, -90, 0);
 		});
+
+	auto light = beap::renderer::Light(scene1.in_tree, "Light");
+	light.ApplyToMeshes([&billboardShader](beap::Mesh* m) {
+		m->shader = &billboardShader;
+		m->SetupTexture("resources/textures/mayro.png");
+		});
+
+	light.Move(glm::vec3(-2, 0, 0));
+	
+
+
+	
 
 	beap::editor::BeapEditor editor(window, &scene1);
 	editor.Init();
@@ -112,7 +135,7 @@ int main() {
 		camera1.Viewport = glm::vec2(SCR_WIDTH, SCR_HEIGHT);
 
 		scene1.Update(window, dt);
-		scene1.RenderScene(defaultShader);
+		scene1.RenderScene(shaderManager);
 		
 		editor.EditorLoop();
 		editor.Render();

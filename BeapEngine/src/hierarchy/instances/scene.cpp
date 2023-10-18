@@ -31,12 +31,34 @@ namespace beap {
 			Position -= glm::normalize(glm::cross(FrontVector, glm::vec3(0,1,0))) * dt;
 		if (glfwGetKey(w, GLFW_KEY_D) == GLFW_PRESS)
 			Position += glm::normalize(glm::cross(FrontVector, glm::vec3(0, 1, 0))) * dt;
+
+
+		if (glfwGetMouseButton(w, GLFW_MOUSE_BUTTON_RIGHT) == GLFW_PRESS)
+		{
+			double mouseX;
+			double mouseY;
+			// Fetches the coordinates of the cursor
+			glfwGetCursorPos(w, &mouseX, &mouseY);
+
+			int width, height;
+			glfwGetWindowSize(w, &width, &height);
+
+			float rotX = -2 * (float)(mouseY - (height / 2)) / height;
+			float rotY = -2 * (float)(mouseX - (width / 2)) / width;
+			Rotate(glm::vec3(rotX, rotY, 0));
+
+			glfwSetCursorPos(w, (width / 2), (height / 2));
+		}
 	}
 
-	void Scene::RenderScene(Shader s) const {
-		s.use();
-		s.setMat4("projection", ActiveCamera->GetPosition());
-		s.setMat4("view", ActiveCamera->GetView());
+	void Scene::RenderScene(ShaderManager shaderManager) const {
+		for (Shader* s : shaderManager.GetShaderList())
+		{
+			s->use();
+			s->setMat4("projection", ActiveCamera->GetPosition());
+			s->setMat4("view", ActiveCamera->GetView());
+		}
+		
 		for (auto child : GetChildren()) {
 			Instance* child_instance = child->Contents;
 			if (child_instance->InstanceType() == "modelObject") {

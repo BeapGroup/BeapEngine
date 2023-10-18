@@ -4,6 +4,7 @@
 
 #include "gameobject.h"
 #include "../../renderer/Shader.h"
+#include "../../renderer/ShaderManager.h"
 
 namespace beap {
 
@@ -37,7 +38,7 @@ namespace beap {
 	public:
 		Camera* ActiveCamera;
 
-		void RenderScene(Shader s) const;
+		void RenderScene(ShaderManager shaderManager) const;
 		void Update(GLFWwindow* w, float dt) override;
 		void FindCamera();
 

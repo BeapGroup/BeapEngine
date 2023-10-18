@@ -154,6 +154,7 @@
     <ClCompile Include="src\thirdparty\imgui\imgui_tables.cpp" />
     <ClCompile Include="src\thirdparty\imgui\imgui_widgets.cpp" />
     <ClCompile Include="src\thirdparty\stb_image.cpp" />
+    <ClCompile Include="src\utils\Light.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\BeapEditor.h" />
@@ -179,8 +180,11 @@
     <ClInclude Include="src\thirdparty\imgui\imstb_textedit.h" />
     <ClInclude Include="src\thirdparty\imgui\imstb_truetype.h" />
     <ClInclude Include="src\thirdparty\stb_image.h" />
+    <ClInclude Include="src\utils\Light.h" />
+    <ClInclude Include="src\utils\Logger.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="resources\shaders\billboard.vert" />
     <None Include="resources\shaders\default.frag" />
     <None Include="resources\shaders\default.vert" />
     <None Include="resources\shaders\no_texture.frag" />
