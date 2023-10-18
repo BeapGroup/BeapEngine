@@ -12,8 +12,18 @@ namespace beap {
 
 class Shader
 {
+private:
+    const char* shaderName;
 public:
     unsigned int ID;
+
+    void SetShaderName(const char* name)
+    {
+        shaderName = name;
+    }
+
+    const char* GetShaderName() { return shaderName; }
+    
     // constructor generates the shader on the fly
     // ------------------------------------------------------------------------
     Shader(const char* vertexPath, const char* fragmentPath)
@@ -71,6 +81,13 @@ public:
         glDeleteShader(fragment);
 
     }
+
+    Shader(const char* vertexPath, const char* fragmentPath, const char* name)
+    {
+        Shader(vertexPath, fragmentPath);
+        SetShaderName(name);
+    }
+
     // activate the shader
     // ------------------------------------------------------------------------
     void use() const

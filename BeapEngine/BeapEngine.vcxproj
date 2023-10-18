@@ -145,6 +145,7 @@
     <ClCompile Include="src\renderer\gl\EBO.cpp" />
     <ClCompile Include="src\renderer\gl\VAO.cpp" />
     <ClCompile Include="src\renderer\gl\VBO.cpp" />
+    <ClCompile Include="src\renderer\ShaderManager.cpp" />
     <ClCompile Include="src\thirdparty\imgui\imgui.cpp" />
     <ClCompile Include="src\thirdparty\imgui\imgui_demo.cpp" />
     <ClCompile Include="src\thirdparty\imgui\imgui_draw.cpp" />
@@ -167,6 +168,7 @@
     <ClInclude Include="src\renderer\gl\VAO.h" />
     <ClInclude Include="src\renderer\gl\VBO.h" />
     <ClInclude Include="src\renderer\Shader.h" />
+    <ClInclude Include="src\renderer\ShaderManager.h" />
     <ClInclude Include="src\thirdparty\imgui\imconfig.h" />
     <ClInclude Include="src\thirdparty\imgui\imgui.h" />
     <ClInclude Include="src\thirdparty\imgui\imgui_impl_glfw.h" />
