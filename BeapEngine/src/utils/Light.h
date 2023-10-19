@@ -17,7 +17,7 @@ namespace beap
 
 		struct FLightData
 		{
-			glm::vec3 lightColor;
+			glm::vec4 lightColor = glm::vec4(1.0f);
 			float intensity;
 			float attenuation;
 		};
@@ -29,7 +29,7 @@ namespace beap
 			ELightType type;
 			FLightData data;
 
-			std::string_view InstanceType() const override { return "modelObject"; }
+			std::string_view InstanceType() const override { return "light"; }
 
 
 			Light() = default;

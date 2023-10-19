@@ -82,12 +82,13 @@ int main() {
 	beap::ShaderManager shaderManager;
 
 	beap::Shader defaultShader("resources/shaders/default.vert", "resources/shaders/default.frag");
-	beap::Shader billboardShader("resources/shaders/billboard.vert", "resources/shaders/default.frag");
+	beap::Shader billboardShader("resources/shaders/default.vert", "resources/shaders/default.frag");
 
 	shaderManager.AddShader(&defaultShader);
 	shaderManager.AddShader(&billboardShader);
 
 	beap::ModelObject monker(scene1.in_tree, "monker", new beap::Model("resources/models/monkey.gltf"));
+	beap::ModelObject generations(scene1.in_tree, "generations", new beap::Model("resources/models/generations.gltf"));
 	auto c = beap::Model::Cube(glm::vec3(-1, -1, -1), glm::vec3(1, 1, 1));
 	beap::ModelObject cuber(scene1.in_tree, "planer", &c);
 	
@@ -104,14 +105,16 @@ int main() {
 		m->eulerRotation = glm::vec3(0, -90, 0);
 		});
 
-	auto light = beap::renderer::Light(scene1.in_tree, "Light");
-	light.ApplyToMeshes([&billboardShader](beap::Mesh* m) {
-		m->shader = &billboardShader;
-		m->SetupTexture("resources/textures/mayro.png");
+	generations.ApplyToMeshes([&defaultShader](beap::Mesh* m) {
+		m->shader = &defaultShader;
+		m->SetupTexture("resources/textures/genplayer.png");
 		});
 
-	light.Move(glm::vec3(-2, 0, 0));
-	
+	auto light = beap::renderer::Light(scene1.in_tree, "Light");
+	light.ApplyToMeshes([&defaultShader](beap::Mesh* m) {
+		m->shader = &defaultShader;
+		m->SetupTexture("resources/textures/mayro.png");
+		});
 
 
 	
@@ -130,7 +133,8 @@ int main() {
 		glClearColor(0.2f, 0.7f, 0.6f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		defaultShader.setVec3("lightPos", lightPos);
+		defaultShader.setVec3("lightPos", light.Position);
+		defaultShader.setVec4("lightCol", light.data.lightColor);
 
 		camera1.Viewport = glm::vec2(SCR_WIDTH, SCR_HEIGHT);
 

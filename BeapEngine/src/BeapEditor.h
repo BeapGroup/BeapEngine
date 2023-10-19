@@ -4,6 +4,7 @@
 #include "thirdparty/imgui/imgui_impl_glfw.h"
 #include "thirdparty/imgui/imgui_impl_opengl3.h"
 #include "renderer/ShaderManager.h"
+#include "utils/Light.h"
 
 #include "hierarchy/instances/scene.h"
 

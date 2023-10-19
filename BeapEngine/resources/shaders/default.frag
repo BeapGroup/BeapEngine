@@ -8,6 +8,7 @@ in vec3 crntPos;
 uniform sampler2D tex;
 
 uniform vec3 lightPos;
+uniform vec4 lightCol;
 
 void main()
 {
@@ -17,5 +18,5 @@ void main()
 	vec3 lightDirection = normalize(lightPos - crntPos);
 	float diffuse = max(dot(normal, lightDirection), 0.0f);
 
-	FragColor = texture(tex, TexCoord) * (diffuse + ambient);
+	FragColor = texture(tex, TexCoord) * (diffuse + ambient) * lightCol;
 }

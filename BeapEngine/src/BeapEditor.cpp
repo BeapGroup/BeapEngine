@@ -44,7 +44,8 @@ void beap::editor::BeapEditor::EditorLoop()
         {
             if (ImGui::Selectable(scene->GetChildren()[i]->Contents->name.c_str(), false))
             {
-                selectedInstance = scene->GetChildren()[i];
+                std::cout << "a" << std::endl;
+                selectedInstance = scene->GetChildren()[i]->Contents;
             }
         }
 
@@ -59,7 +60,63 @@ void beap::editor::BeapEditor::EditorLoop()
     ImGui::Begin("Inspector");
     if (selectedInstance != nullptr)
     {
+        GameObject* gObj = dynamic_cast<GameObject*>(selectedInstance);
+        if (gObj != nullptr)
+        {
+            float pos[3]{ gObj->Position.x, gObj->Position.y, gObj->Position.z };
+            if (ImGui::DragFloat3("Translation", pos, 0.01f))
+            {
+                gObj->SetPosition(glm::vec3(pos[0], pos[1], pos[2]));
+            }
+
+            float rot[3]{ gObj->Rotation.x, gObj->Rotation.y, gObj->Rotation.z };
+            if (ImGui::DragFloat3("Rotation", rot, 0.01f))
+            {
+                gObj->SetRotation(glm::vec3(rot[0], rot[1], rot[2]));
+            }
+
+            float scl[3]{ gObj->Scale.x, gObj->Scale.y, gObj->Scale.z };
+            if (ImGui::DragFloat3("Scale", scl, 0.01f))
+            {
+                gObj->SetScale(glm::vec3(scl[0], scl[1], scl[2]));
+            }
+        }
         
+
+        if (selectedInstance->InstanceType() == "light")
+        {
+            ImGui::Text("Light Editor");
+            static int lightType = 0;
+
+            // Do some magic C++ cast
+            beap::renderer::Light* light = dynamic_cast<beap::renderer::Light*>(selectedInstance);
+
+            if (ImGui::Combo("Type", &lightType, "Directional\0Spot\0Point\0"))
+            {
+                
+
+                switch (lightType)
+                {
+                    case 0:
+                        light->type = beap::renderer::ELightType::DIRECTIONAL;
+                        break;
+                    case 1:
+                        light->type = beap::renderer::ELightType::SPOT;
+                        break;
+                    case 2:
+                        light->type = beap::renderer::ELightType::POINT;
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            float col[4]{ light->data.lightColor.x, light->data.lightColor.y, light->data.lightColor.z, light->data.lightColor.w};
+            if (ImGui::ColorEdit4("Light Color", col))
+            {
+                light->data.lightColor = glm::vec4(col[0], col[1], col[2], col[3]);
+            }
+        }
     }
     ImGui::End();
 
