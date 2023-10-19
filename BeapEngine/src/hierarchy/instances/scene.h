@@ -10,6 +10,7 @@ namespace beap {
 
 	class Camera : public Instance {
 	public:
+		bool FirstClick = false;
 		bool IsActive = true;
 		glm::f32vec3 Position = glm::vec3(0.0f, 0.0f, 3.0f);
 		glm::f32vec2 Viewport;

@@ -35,19 +35,34 @@ namespace beap {
 
 		if (glfwGetMouseButton(w, GLFW_MOUSE_BUTTON_RIGHT) == GLFW_PRESS)
 		{
+			int width, height;
+			glfwGetWindowSize(w, &width, &height);
+			glfwSetInputMode(w, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
+
+			if (FirstClick)
+			{
+				glfwSetCursorPos(w, (width / 2), (height / 2));
+				FirstClick = false;
+			}
 			double mouseX;
 			double mouseY;
 			// Fetches the coordinates of the cursor
 			glfwGetCursorPos(w, &mouseX, &mouseY);
 
-			int width, height;
-			glfwGetWindowSize(w, &width, &height);
+			
 
 			float rotX = -2 * (float)(mouseY - (height / 2)) / height;
 			float rotY = -2 * (float)(mouseX - (width / 2)) / width;
 			Rotate(glm::vec3(rotX, rotY, 0));
 
 			glfwSetCursorPos(w, (width / 2), (height / 2));
+		}
+		else if (glfwGetMouseButton(w, GLFW_MOUSE_BUTTON_RIGHT) == GLFW_RELEASE)
+		{
+			// Unhides cursor since camera is not looking around anymore
+			glfwSetInputMode(w, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+			// Makes sure the next time the camera looks around it doesn't jump
+			FirstClick = true;
 		}
 	}
 

@@ -21,8 +21,8 @@
 
 #include "renderer/ShaderManager.h"
 
-int SCR_WIDTH = 800;
-int SCR_HEIGHT = 600;
+int SCR_WIDTH = 1280;
+int SCR_HEIGHT = 720;
 
 void on_framebuf_resize(GLFWwindow*, int width, int height) {
 	glViewport(0, 0, width, height);
