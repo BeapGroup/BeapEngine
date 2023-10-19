@@ -163,6 +163,7 @@
     <ClInclude Include="src\hierarchy\instances\modelobject.h" />
     <ClInclude Include="src\hierarchy\instances\scene.h" />
     <ClInclude Include="src\math\tree.h" />
+    <ClInclude Include="src\renderer\LightManager.h" />
     <ClInclude Include="src\renderer\Mesh.h" />
     <ClInclude Include="src\renderer\Model.h" />
     <ClInclude Include="src\renderer\gl\EBO.h" />

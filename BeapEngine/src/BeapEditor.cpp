@@ -42,14 +42,23 @@ void beap::editor::BeapEditor::EditorLoop()
     {
         if (scene->GetChildren()[i]->Contents->GetParent() == scene)
         {
-            ImGui::Text(scene->GetChildren()[i]->Contents->name.c_str());
-
+            if (ImGui::Selectable(scene->GetChildren()[i]->Contents->name.c_str(), false))
+            {
+                selectedInstance = scene->GetChildren()[i];
+            }
         }
 
         scene->GetChildren()[i]->Contents->in_tree->Traverse([](Node<Instance*>* mynode)
         {
             ImGui::Text((" - " + mynode->Contents->name).c_str());
         });
+        
+    }
+    ImGui::End();
+
+    ImGui::Begin("Inspector");
+    if (selectedInstance != nullptr)
+    {
         
     }
     ImGui::End();

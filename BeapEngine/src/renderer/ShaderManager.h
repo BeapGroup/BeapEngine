@@ -23,6 +23,8 @@ namespace beap
             SHADER_COMPILE_ERROR_GEOMETRY,
             SHADER_COMPILE_ERROR_PROGRAM
         };
+
+        // Returned when a shader generation operation is completed
         struct FShaderOperationResult
         {
             bool Success;

@@ -26,6 +26,8 @@ namespace beap
 		{
 		public:
 			Model* LocalModel;
+			ELightType type;
+			FLightData data;
 
 			std::string_view InstanceType() const override { return "modelObject"; }
 

@@ -17,6 +17,8 @@ namespace beap
 		private:
 			beap::ShaderManager* manager;
 			beap::shaders::generation::FShaderGenerationSettings settings;
+
+			Instance* selectedInstance;
 		public:
 				GLFWwindow* window;
 				beap::Scene* scene;

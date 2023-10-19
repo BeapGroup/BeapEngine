@@ -110,12 +110,17 @@ beap::shaders::generation::FShaderGenerationResult beap::ShaderManager::Generate
         fragmentSource += "uniform vec4 ambientColor;\n";
     }
 
+    // Generate the FLightData struct in the shader.
     if (settings.hasLighting)
     {
-        if (settings.hasDiffuse)
-        {
-
-        }
+        fragmentSource += "#define MAX_LIGHTS 16\n";
+        fragmentSource += "struct Light {\n";
+        fragmentSource += "vec3 lightColor;\n";
+        fragmentSource += "vec3 lightPos;\n";
+        fragmentSource += "float intensity;\n";
+        fragmentSource += "float attenuation;\n";
+        fragmentSource += "}\n";
+        fragmentSource += "Light lights[MAX_LIGHTS];\n";
     }
 
     fragmentSource += "void main() {\n"; // ============================ MAIN
