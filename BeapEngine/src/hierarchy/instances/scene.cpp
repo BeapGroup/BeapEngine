@@ -67,7 +67,7 @@ namespace beap {
 	}
 
 	void Scene::RenderScene(ShaderManager shaderManager) const {
-		for (Shader* s : shaderManager.GetShaderList())
+		for (Shader const* s : shaderManager.GetShaderList())
 		{
 			s->use();
 			s->setMat4("projection", ActiveCamera->GetPosition());
@@ -76,7 +76,7 @@ namespace beap {
 		
 		for (auto child : GetChildren()) {
 			Instance* child_instance = child->Contents;
-			if (child_instance->InstanceType() == "modelObject") {
+			if (dynamic_cast<GameObject*>(child_instance) != nullptr) {
 				((ModelObject*)child_instance)->Render();
 			}
 		}
@@ -93,6 +93,7 @@ namespace beap {
 			Instance* child_instance = child->Contents;
 			if (child_instance->InstanceType() == "camera") {
 				ActiveCamera = (Camera*)child_instance;
+				return;
 			}
 		}
 
