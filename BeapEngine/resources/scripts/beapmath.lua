@@ -9,7 +9,7 @@ function BeapEngine.Vector2:New(o)
 end
 
 function BeapEngine.Vector2:FromNum(a, b)
-	return Vector2:New({x = a, y = b})
+	return BeapEngine.Vector2:New({x = a, y = b})
 end
 
 function BeapEngine.Vector2:Dot(other)
@@ -21,17 +21,27 @@ function BeapEngine.Vector2:__tostring()
 end
 
 function BeapEngine.Vector2:__add(other)
-	return Vector2:New({x = self.x + other.x, y = self.y + other.y})
+	return BeapEngine.Vector2:New({x = self.x + other.x, y = self.y + other.y})
 end
 
 function BeapEngine.Vector2:__sub(other)
-	return Vector2:New({x = self.x - other.x, y = self.y - other.y})
+	return BeapEngine.Vector2:New({x = self.x - other.x, y = self.y - other.y})
 end
 
 function BeapEngine.Vector2:__mul(other)
-	return Vector2:New({x = self.x * other.x, y = self.y * other.y})
+	return BeapEngine.Vector2:New({x = self.x * other.x, y = self.y * other.y})
 end
 
 function BeapEngine.Vector2:__div(other)
-	return Vector2:New({x = self.x / other.x, y = self.y / other.y})
+	return BeapEngine.Vector2:New({x = self.x / other.x, y = self.y / other.y})
+end
+
+function BeapEngine.Vector2:Scale(num)
+	return BeapEngine.Vector2:New({x = self.x * num, y = self.y * num})
+end
+
+function BeapEngine.Vector2:Rotate(theta)
+	local st = math.sin(theta)
+	local ct = math.cos(theta)
+	return BeapEngine.Vector2:FromNum(self.x * ct - self.y * st, self.x * st + self.y * ct)
 end

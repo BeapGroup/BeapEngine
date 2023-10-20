@@ -139,6 +139,7 @@
     <ClCompile Include="src\hierarchy\instances\instance.cpp" />
     <ClCompile Include="src\hierarchy\instances\modelobject.cpp" />
     <ClCompile Include="src\hierarchy\instances\scene.cpp" />
+    <ClCompile Include="src\hierarchy\instances\Script.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\renderer\Mesh.cpp" />
     <ClCompile Include="src\renderer\Model.cpp" />
@@ -146,6 +147,7 @@
     <ClCompile Include="src\renderer\gl\VAO.cpp" />
     <ClCompile Include="src\renderer\gl\VBO.cpp" />
     <ClCompile Include="src\renderer\ShaderManager.cpp" />
+    <ClCompile Include="src\scripting\beaplua.cpp" />
     <ClCompile Include="src\thirdparty\imgui\imgui.cpp" />
     <ClCompile Include="src\thirdparty\imgui\imgui_demo.cpp" />
     <ClCompile Include="src\thirdparty\imgui\imgui_draw.cpp" />
@@ -162,6 +164,7 @@
     <ClInclude Include="src\hierarchy\instances\instance.h" />
     <ClInclude Include="src\hierarchy\instances\modelobject.h" />
     <ClInclude Include="src\hierarchy\instances\scene.h" />
+    <ClInclude Include="src\hierarchy\instances\Script.h" />
     <ClInclude Include="src\math\tree.h" />
     <ClInclude Include="src\renderer\LightManager.h" />
     <ClInclude Include="src\renderer\Mesh.h" />

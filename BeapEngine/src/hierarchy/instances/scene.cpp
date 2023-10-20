@@ -84,7 +84,9 @@ namespace beap {
 
 	void Scene::Update(GLFWwindow* w, float dt) {
 		for (auto& instnode : GetChildren()) {
-			instnode->Contents->Update(w, dt);
+			instnode->Traverse([w,dt](Node<Instance*>* node) {
+				node->Contents->Update(w, dt);
+			});
 		}
 	}
 

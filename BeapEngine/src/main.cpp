@@ -14,6 +14,7 @@
 #include "hierarchy/instances/instance.h"
 #include "hierarchy/instances/scene.h"
 #include "hierarchy/instances/modelobject.h"
+#include "hierarchy/instances/Script.h"
 
 #include "BeapEditor.h"
 
@@ -53,7 +54,7 @@ int main() {
 #endif
 
 	auto interp = beap::lua::LuaInterpreter(true, true);
-	interp.ExecuteString("print(BeapEngine.Vector2:New())");
+	interp.ExecuteString("print(BeapEngine.Vector2:FromNum(1,0):Rotate(math.pi / 2))");
 
 	GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "Beap Engine", NULL, NULL);
 	if (window == NULL) {
@@ -97,6 +98,8 @@ int main() {
 	auto c = beap::Model::Cube(glm::vec3(-1, -1, -1), glm::vec3(1, 1, 1));
 	beap::ModelObject cuber(scene1.in_tree, "planer", &c);
 	
+	beap::Script matthew(monker.in_tree, "matthew-script", R"( function update(parent, dt) print("h") end )");
+
 	cuber.Move(glm::vec3(.5f, -.5f, -.5f));
 
 	cuber.ApplyToMeshes([&defaultShader](beap::Mesh* m) {
