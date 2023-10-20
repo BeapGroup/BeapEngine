@@ -171,6 +171,7 @@
     <ClInclude Include="src\renderer\gl\VBO.h" />
     <ClInclude Include="src\renderer\Shader.h" />
     <ClInclude Include="src\renderer\ShaderManager.h" />
+    <ClInclude Include="src\scripting\beaplua.h" />
     <ClInclude Include="src\thirdparty\imgui\imconfig.h" />
     <ClInclude Include="src\thirdparty\imgui\imgui.h" />
     <ClInclude Include="src\thirdparty\imgui\imgui_impl_glfw.h" />
@@ -185,10 +186,16 @@
     <ClInclude Include="src\utils\Logger.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="resources\scripts\beapmath.lua" />
+    <None Include="resources\scripts\main.lua" />
     <None Include="resources\shaders\billboard.vert" />
     <None Include="resources\shaders\default.frag" />
     <None Include="resources\shaders\default.vert" />
     <None Include="resources\shaders\no_texture.frag" />
+    <None Include="src\thirdparty\lua\lua54.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="src\thirdparty\lua\lua54.lib" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -21,6 +21,8 @@
 
 #include "renderer/ShaderManager.h"
 
+#include "scripting/beaplua.h"
+
 int SCR_WIDTH = 1280;
 int SCR_HEIGHT = 720;
 
@@ -49,6 +51,9 @@ int main() {
 #ifdef __APPLE__ // get real
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 #endif
+
+	auto interp = beap::lua::LuaInterpreter(true, true);
+	interp.ExecuteString("print(BeapEngine.Vector2:New())");
 
 	GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "Beap Engine", NULL, NULL);
 	if (window == NULL) {
