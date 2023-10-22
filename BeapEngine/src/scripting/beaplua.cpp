@@ -29,8 +29,18 @@ namespace beap::lua {
 			luaL_openlibs(L);
 		}
 		if (incl_env) {
+			RegisterCppFunctions();
 			luaL_dofile(L, "resources/scripts/main.lua");
 		}
+	}
+
+	void LuaInterpreter::RegisterCppFunctions() {
+		//functions are forced to be in a global scope
+		//BeapEngine.FuncName could be achieved through lua_setfuncs
+		//but its behavior is fucking hellish
+		lua_register(L, "GetInstance", LuaInterpreter::lw_GetInstance);
+		lua_register(L, "GetParent", LuaInterpreter::lw_GetParent);
+		lua_register(L, "FindChild", LuaInterpreter::lw_FindChild);
 	}
 }
 

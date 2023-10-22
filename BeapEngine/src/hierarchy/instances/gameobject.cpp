@@ -29,4 +29,38 @@ namespace beap {
 	void GameObject::SetScale(glm::f32vec3 scalar) {
 		Scale = scalar;
 	}
+
+	void GameObject::GetLuaTable(lua_State* L) {
+		Instance::GetLuaTable(L);
+
+		lua_createtable(L, 0, 3);
+		lua_pushnumber(L, Position.x);
+		lua_setfield(L, -2, "x");
+		lua_pushnumber(L, Position.y);
+		lua_setfield(L, -2, "y");
+		lua_pushnumber(L, Position.z);
+		lua_setfield(L, -2, "z");
+
+		lua_setfield(L, -2, "position");
+
+		lua_createtable(L, 0, 3);
+		lua_pushnumber(L, Rotation.x);
+		lua_setfield(L, -2, "x");
+		lua_pushnumber(L, Rotation.y);
+		lua_setfield(L, -2, "y");
+		lua_pushnumber(L, Rotation.z);
+		lua_setfield(L, -2, "z");
+
+		lua_setfield(L, -2, "rotation");
+
+		lua_createtable(L, 0, 3);
+		lua_pushnumber(L, Scale.x);
+		lua_setfield(L, -2, "x");
+		lua_pushnumber(L, Scale.y);
+		lua_setfield(L, -2, "y");
+		lua_pushnumber(L, Scale.z);
+		lua_setfield(L, -2, "z");
+
+		lua_setfield(L, -2, "scale");
+	}
 }

@@ -25,5 +25,15 @@ namespace beap {
 	Instance* Instance::GetParent() const {
 		return in_tree->Parent.value()->Contents;
 	}
+
+	void Instance::GetLuaTable(lua_State* L) {
+		lua_createtable(L, 0, 2);
+
+		lua_pushstring(L, name.c_str());
+		lua_setfield(L, -2, "name");
+
+		lua_pushstring(L, std::string(InstanceType()).c_str());
+		lua_setfield(L, -2, "type");
+	}
 }
 

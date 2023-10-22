@@ -12,6 +12,8 @@ namespace beap {
 		glm::f32vec3 Scale = glm::u32vec3(1);
 
 		std::string_view InstanceType() const override { return "gameObject"; }
+		void GetLuaTable(lua_State* L) override;
+
 		void ResetTransform();
 		void CopyTransform(GameObject const* gbj);
 

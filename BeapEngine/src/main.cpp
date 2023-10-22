@@ -98,14 +98,13 @@ int main() {
 	auto c = beap::Model::Cube(glm::vec3(-1, -1, -1), glm::vec3(1, 1, 1));
 	beap::ModelObject cuber(scene1.in_tree, "planer", &c);
 	
-	beap::Script matthew(monker.in_tree, "matthew-script", R"( function update(parent, dt) print("h") end )");
+	beap::Script matthew(monker.in_tree, "matthew-script", R"( function update(parent, dt) print(GetInstance(FindChild(parent, "matthew-script")).source) end )");
 
 	cuber.Move(glm::vec3(.5f, -.5f, -.5f));
 
 	cuber.ApplyToMeshes([&defaultShader](beap::Mesh* m) {
 		m->shader = &defaultShader;
 		m->SetupTexture("resources/textures/mayro.png");
-		//m->eulerRotation = glm::vec3(0, -90, 0);
 		});
 	monker.ApplyToMeshes([&defaultShader](beap::Mesh* m) {
 		m->shader = &defaultShader;

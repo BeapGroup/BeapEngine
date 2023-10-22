@@ -16,4 +16,11 @@ namespace beap {
 
 	}
 
+	void Script::GetLuaTable(lua_State* L) {
+		Instance::GetLuaTable(L);
+
+		lua_pushstring(L, Source.c_str());
+		lua_setfield(L, -2, "source");
+	}
+
 }

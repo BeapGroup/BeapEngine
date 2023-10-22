@@ -9,6 +9,13 @@
 
 #include "../../math/tree.h"
 
+extern "C" {
+#include "../../thirdparty/lua/include/lua.h"
+#include "../../thirdparty/lua/include/lauxlib.h"
+#include "../../thirdparty/lua/include/lualib.h"
+}
+
+
 namespace beap {
 
 	class Instance {
@@ -26,6 +33,7 @@ namespace beap {
 		virtual unsigned int GetExplorerIcon() const { return 0; }
 		virtual std::string_view InstanceType() const { return "instance"; }
 		virtual void Update(GLFWwindow* w, float dt) { return; }
+		virtual void GetLuaTable(lua_State* L);
 
 		Instance() = default;
 		explicit Instance(std::string const& instname) : name(instname) {}
