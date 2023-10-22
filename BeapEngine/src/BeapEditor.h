@@ -26,7 +26,7 @@ namespace beap
 				BeapEditor(GLFWwindow* window, beap::Scene* scene);
 				void Init();
 				void PreRender();
-				void EditorLoop();
+				void EditorLoop(unsigned int fboTexture);
 				void RenderShaderManagerEditor();
 				void Render();
 				void CleanUp();

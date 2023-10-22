@@ -195,6 +195,8 @@
     <None Include="resources\shaders\default.frag" />
     <None Include="resources\shaders\default.vert" />
     <None Include="resources\shaders\no_texture.frag" />
+    <None Include="resources\shaders\skybox.frag" />
+    <None Include="resources\shaders\skybox.vert" />
     <None Include="src\thirdparty\lua\lua54.dll" />
   </ItemGroup>
   <ItemGroup>

@@ -25,13 +25,49 @@ void beap::editor::BeapEditor::Init()
 
 void beap::editor::BeapEditor::PreRender()
 {
+    ImGuiIO& io = ImGui::GetIO();
+    io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
     ImGui_ImplOpenGL3_NewFrame();
     ImGui_ImplGlfw_NewFrame();
     ImGui::NewFrame();
 }
 
-void beap::editor::BeapEditor::EditorLoop()
+void beap::editor::BeapEditor::EditorLoop(unsigned int fboTexture)
 {
+
+   
+
+    ImGuiDockNodeFlags dockspace_flags = ImGuiDockNodeFlags_None;
+    ImGuiWindowFlags window_flags = ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoDocking;
+    const ImGuiViewport* viewport = ImGui::GetMainViewport();
+    ImGui::SetNextWindowPos(viewport->WorkPos);
+    ImGui::SetNextWindowSize(viewport->WorkSize);
+    ImGui::SetNextWindowViewport(viewport->ID);
+    window_flags |= ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove;
+    window_flags |= ImGuiWindowFlags_NoBringToFrontOnFocus | ImGuiWindowFlags_NoNavFocus;
+
+
+    ImGui::Begin("DockSpace Demo", nullptr, window_flags);
+
+    ImGuiID dockspace_id = ImGui::GetID("MyDockSpace");
+    ImGui::DockSpace(dockspace_id, ImVec2(0.0f, 0.0f), dockspace_flags);
+
+    ImGui::End();
+
+
+    ImGui::Begin("Scene");
+    ImVec2 pos = ImGui::GetCursorScreenPos();
+
+    int window_width, window_height;
+    glfwGetWindowSize(window, &window_width, &window_height);
+
+    ImGui::Image((void*)fboTexture, ImVec2(ImGui::GetWindowSize().x, ImGui::GetWindowSize().y), ImVec2(0, 1), ImVec2(1, 0));
+
+    ImGui::End();
+
+
+    ImGui::ShowDemoWindow();
+
     ImGui::Begin("Editor");
     ImGui::Text("Editor Test");
     if (ImGui::Button("Test"))
@@ -70,7 +106,7 @@ void beap::editor::BeapEditor::EditorLoop()
             }
 
             float rot[3]{ gObj->Rotation.x, gObj->Rotation.y, gObj->Rotation.z };
-            if (ImGui::DragFloat3("Rotation", rot, 0.01f))
+            if (ImGui::DragFloat3("Rotation", rot, 0.1f))
             {
                 gObj->SetRotation(glm::vec3(rot[0], rot[1], rot[2]));
             }
